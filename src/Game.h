@@ -17,9 +17,11 @@ public:
 
 	bool running();
 
+	static SDL_Renderer* renderer;
+
 private:
 	bool isRunning;
 	SDL_Window* window;
-	SDL_Renderer* renderer;
+	
 };
 
