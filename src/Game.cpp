@@ -1,11 +1,9 @@
 #include "Game.h"
-#include "TextureManager.h"
-#include "GameObject.h"
-#include "Constants.h"
-#include "../util/log.h"
+
 
 GameObject* player;
 GameObject* enemy;
+Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -38,6 +36,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	if (renderer == NULL) return;
+	SDL_RenderSetScale(renderer, 1.5, 1.5);
 	SDL_SetRenderDrawColor(renderer, 20, 20, 20, 1);
 	okay("Renderer created");
 
@@ -45,6 +44,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	player = new GameObject(Constant::PLAYER_SPRITE, 0, 0);
 	enemy = new GameObject(Constant::ENEMY_SPRITE, 50, 50);
+
+	map = new Map();
 }
 
 void Game::handleEvents() {
@@ -68,6 +69,7 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(renderer);
+	map->drawMap();
 	player->Render();
 	enemy->Render();
 	SDL_RenderPresent(renderer);

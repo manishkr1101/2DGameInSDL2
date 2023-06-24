@@ -9,10 +9,8 @@ GameObject::GameObject(const char* textureSheet, int x, int y)
 
 	xPos = x;
 	yPos = y;
-	srcRect = { 0, 0, 400, 400 };
-
-	destRect = { xPos, yPos, srcRect.w, srcRect.h };
-
+	srcRect = { 0, 0, 128, 128 };
+	destRect = { 0 };
 }
 
 GameObject::~GameObject()
@@ -22,7 +20,7 @@ GameObject::~GameObject()
 void GameObject::Update()
 {
 	xPos++;
-	destRect = { xPos, yPos, srcRect.w, srcRect.h };
+	destRect = { xPos, yPos, 2 * srcRect.w, 2 * srcRect.h };
 }
 
 void GameObject::Render()
