@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "TextureManager.h"
-#include "GameObject.h"
 #include "../util/log.h"
 #include "Constants.h"
 #include "Map.h"
