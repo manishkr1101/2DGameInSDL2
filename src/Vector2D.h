@@ -15,3 +15,5 @@ public:
 
 	friend Vector2D& operator+(const Vector2D& v1, const Vector2D& v2);
 };
+
+const Vector2D UNIT_VECTOR(1, 1);

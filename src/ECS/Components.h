@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PositionComponent.h"
+#include "TranformComponent.h"
 #include "SpriteComponent.h"
 
 

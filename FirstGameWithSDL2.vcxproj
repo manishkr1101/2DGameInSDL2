@@ -142,7 +142,7 @@
     <ClInclude Include="src\ECS\Components.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\ECS\ECS.h" />
-    <ClInclude Include="src\ECS\PositionComponent.h" />
+    <ClInclude Include="src\ECS\TranformComponent.h" />
     <ClInclude Include="src\ECS\SpriteComponent.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameObject.h" />

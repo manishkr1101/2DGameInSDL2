@@ -48,7 +48,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 	
 	//ecs implementation
-	player.addComponent<PositionComponent>();
+	player.addComponent<TransformComponent>();
 	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE);
 	
 }
@@ -70,12 +70,10 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	if (player.getComponent<PositionComponent>().x() > 100) {
+	if (player.getComponent<TransformComponent>().position.x > 100) {
 		player.getComponent<SpriteComponent>().setTex(Constant::ENEMY_SPRITE);
 	}
 
-	std::cout << player.getComponent<PositionComponent>().x() << ", " <<
-		player.getComponent<PositionComponent>().y() << "\n";
 }
 
 void Game::render()
