@@ -2,13 +2,16 @@
 
 #include "ECS/ECS.h"
 #include "ECS/Components.h"
+#include "Collision.h"
 
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
 Manager manager;
 auto& player(manager.addEntity());
+auto& wall(manager.addEntity());
 
 Game::Game(): isRunning(false), window(NULL)
 {
@@ -48,13 +51,18 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 	
 	//ecs implementation
-	player.addComponent<TransformComponent>();
+	player.addComponent<TransformComponent>(0.0f, 0.0f, 128, 128, 0.5f);
 	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE);
-	
+	player.addComponent<KeyboardController>();
+	player.addComponent<ColliderComponent>("player");
+
+	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20);
+	wall.addComponent<SpriteComponent>(Constant::DIRT_SPRITE);
+	wall.addComponent<ColliderComponent>("wall");
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
+	
 	SDL_PollEvent(&event);
 	switch (event.type) {
 	case SDL_QUIT:
@@ -70,10 +78,9 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	if (player.getComponent<TransformComponent>().position.x > 100) {
-		player.getComponent<SpriteComponent>().setTex(Constant::ENEMY_SPRITE);
+	if (Collision::AABB(player, wall)) {
+		std::cout << "hit wall" << std::endl;
 	}
-
 }
 
 void Game::render()

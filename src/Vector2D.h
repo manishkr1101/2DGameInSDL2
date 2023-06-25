@@ -13,7 +13,9 @@ public:
 	Vector2D& multiply(const Vector2D& vec);
 	Vector2D& divide(const Vector2D& vec);
 
-	friend Vector2D& operator+(const Vector2D& v1, const Vector2D& v2);
+	friend Vector2D operator+(const Vector2D& v1, const Vector2D& v2);
+
+	Vector2D& operator+=(const Vector2D& vec);
 };
 
 const Vector2D UNIT_VECTOR(1, 1);
