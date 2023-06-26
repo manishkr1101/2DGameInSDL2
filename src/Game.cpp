@@ -59,6 +59,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20);
 	wall.addComponent<SpriteComponent>(Constant::DIRT_SPRITE);
 	wall.addComponent<ColliderComponent>("wall");
+
+	Vector2D vec(2,3);
+	
+	std::cout << vec << std::endl;
 }
 
 void Game::handleEvents() {
@@ -80,6 +84,8 @@ void Game::update()
 
 	if (Collision::AABB(player, wall)) {
 		std::cout << "hit wall" << std::endl;
+		//player.getComponent<TransformComponent>().scale = 2.0f;
+		player.getComponent<TransformComponent>().rollBackPosition();
 	}
 }
 

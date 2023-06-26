@@ -3,7 +3,8 @@
 #include "../Vector2D.h"
 
 class TransformComponent : public Component {
-
+private:
+	Vector2D prevPosition;
 public:
 	Vector2D position;
 	Vector2D velocity;
@@ -14,7 +15,9 @@ public:
 
 	int speed = 3;
 
-	TransformComponent(): position(){}
+	TransformComponent() {
+		position.zero();
+	}
 	
 
 	TransformComponent(float x, float y, int h, int w, float sc = 1.0f) {
@@ -26,11 +29,16 @@ public:
 	}
 
 	void init() override {
-		velocity.x = velocity.y = 0;
+		velocity.zero();
 	}
 
 	void update() override {
+		prevPosition = position;
 		position.x += velocity.x * speed;
 		position.y += velocity.y * speed;
+	}
+
+	void rollBackPosition() {
+		position = prevPosition;
 	}
 };
