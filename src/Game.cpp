@@ -4,6 +4,7 @@
 #include "ECS/Components.h"
 #include "Collision.h"
 
+
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -56,13 +57,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 
-	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20);
+	wall.addComponent<TransformComponent>(300.0f, 300.0f, 20, 300);
 	wall.addComponent<SpriteComponent>(Constant::DIRT_SPRITE);
 	wall.addComponent<ColliderComponent>("wall");
 
-	Vector2D vec(2,3);
-	
-	std::cout << vec << std::endl;
 }
 
 void Game::handleEvents() {

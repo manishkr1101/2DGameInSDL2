@@ -146,6 +146,7 @@
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\ECS\ECS.h" />
     <ClInclude Include="src\ECS\KeyboardController.h" />
+    <ClInclude Include="src\ECS\TileComponent.h" />
     <ClInclude Include="src\ECS\TranformComponent.h" />
     <ClInclude Include="src\ECS\SpriteComponent.h" />
     <ClInclude Include="src\Game.h" />

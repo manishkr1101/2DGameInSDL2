@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-    const int FPS = 75;
+    const int FPS = Constant::FPS;
     const int frameDelay = 1000 / FPS;
     
     Game game;

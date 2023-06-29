@@ -1,7 +1,8 @@
+#pragma once
 #ifndef __CONSTANT_H
 #define __CONSTANT_H
 
-#pragma once
+
 
 class Constant {
 public:
@@ -10,6 +11,7 @@ public:
 	static const char* DIRT_SPRITE;
 	static const char* GRASS_SPRITE;
 	static const char* WATER_SPRITE;
+	static const int FPS;
 };
 
 
