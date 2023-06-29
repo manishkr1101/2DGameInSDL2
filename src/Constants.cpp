@@ -6,3 +6,4 @@ const char* Constant::DIRT_SPRITE = "assets/dirt.png";
 const char* Constant::GRASS_SPRITE = "assets/grass.png";
 const char* Constant::WATER_SPRITE = "assets/water.png";
 const int Constant::FPS = 75;
+const float Constant::SCALE = 1080 / 720.0;

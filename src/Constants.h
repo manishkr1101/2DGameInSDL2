@@ -12,6 +12,7 @@ public:
 	static const char* GRASS_SPRITE;
 	static const char* WATER_SPRITE;
 	static const int FPS;
+	static const float SCALE;
 };
 
 

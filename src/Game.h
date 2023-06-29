@@ -8,7 +8,7 @@
 #include "../util/log.h"
 
 #include "Map.h"
-#include "ECS/ColliderComponent.h"
+class ColliderComponent;
 
 class Game {
 public:

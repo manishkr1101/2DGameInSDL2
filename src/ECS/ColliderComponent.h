@@ -4,6 +4,7 @@
 #include "ECS.h"
 #include "TranformComponent.h"
 #include <string>
+#include "../Game.h"
 
 class ColliderComponent : public Component {
 public:
@@ -21,6 +22,8 @@ public:
 			entity->addComponent<TransformComponent>();
 		}
 		transform = &entity->getComponent<TransformComponent>();
+
+		Game::colliders.push_back(this);
 	}
 
 	void update() override {

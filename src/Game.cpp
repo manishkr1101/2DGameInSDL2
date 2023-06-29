@@ -9,10 +9,15 @@ Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
+std::vector<ColliderComponent*> Game::colliders;
 
 Manager manager;
-auto& player(manager.addEntity());
+
 auto& wall(manager.addEntity());
+auto& tile0(manager.addEntity());
+auto& tile1(manager.addEntity());
+auto& tile2(manager.addEntity());
+auto& player(manager.addEntity());
 
 Game::Game(): isRunning(false), window(NULL)
 {
@@ -43,7 +48,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	if (renderer == NULL) return;
-	SDL_RenderSetScale(renderer, 1.5, 1.5);
+	SDL_RenderSetScale(renderer, Constant::SCALE, Constant::SCALE);
+	okay("enabled scaling factor : %f", Constant::SCALE);
 	SDL_SetRenderDrawColor(renderer, 20, 20, 20, 1);
 	okay("Renderer created");
 
@@ -52,6 +58,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 	
 	//ecs implementation
+	tile0.addComponent<TileComponent>(10, 200, 32, 32, 0);
+	tile1.addComponent<TileComponent>(10, 250, 32, 32, 1);
+	tile1.addComponent<ColliderComponent>("dirt");
+	tile2.addComponent<TileComponent>(10, 300, 32, 32, 2);
+	tile2.addComponent<ColliderComponent>("grass");
+
 	player.addComponent<TransformComponent>(0.0f, 0.0f, 128, 128, 0.5f);
 	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE);
 	player.addComponent<KeyboardController>();
@@ -80,17 +92,20 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	if (Collision::AABB(player, wall)) {
-		std::cout << "hit wall" << std::endl;
-		//player.getComponent<TransformComponent>().scale = 2.0f;
-		player.getComponent<TransformComponent>().rollBackPosition();
+	for (const auto colA : Game::colliders) {
+		for (const auto colB : Game::colliders) {
+			if (colA!=colB && Collision::AABB(*colA, *colB)) {
+				colA->entity->getComponent<TransformComponent>().rollBackPosition();
+			}
+		}
 	}
+
+	
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	map->drawMap();
 	manager.draw();
 	SDL_RenderPresent(renderer);
 }

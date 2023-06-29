@@ -38,6 +38,7 @@ public:
 
 		entity->addComponent<SpriteComponent>(path);
 		sprite = &entity->getComponent<SpriteComponent>();
+		okay("SpriteComponent got added to Tile with path: %s", path);
 	}
 
 };

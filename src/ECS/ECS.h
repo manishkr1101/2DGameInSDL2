@@ -4,6 +4,7 @@
 #include <vector>
 #include <bitset>
 #include <array>
+#include "../../util/log.h"
 
 class Component;
 class Entity;
@@ -67,6 +68,8 @@ public:
 		componentArray[getComoponentTypeID<T>()] = c;
 		componentBitSet[getComoponentTypeID<T>()] = true;
 
+		okay("New component got added. Total count %d", (int) components.size());
+
 		c->init();
 		return *c;
 	}
@@ -107,6 +110,7 @@ public:
 		Entity* e = new Entity();
 		std::unique_ptr<Entity> uPtr{e};
 		entities.emplace_back(std::move(uPtr));
+		okay("New entity added. Total count %d", (int) entities.size());
 		return *e;
 	}
 };
