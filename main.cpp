@@ -1,6 +1,7 @@
 #include <iostream>
 #include "src/Game.h"
 #include "util/log.h"
+#include "src/Constants.h"
 
 
 int main(int argc, char *argv[])

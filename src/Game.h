@@ -6,9 +6,9 @@
 #include <SDL_image.h>
 #include "TextureManager.h"
 #include "../util/log.h"
-#include "Constants.h"
+
 #include "Map.h"
-//#include "ECS/Components.h"
+#include "ECS/ColliderComponent.h"
 
 class Game {
 public:
@@ -26,7 +26,7 @@ public:
 
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
-	//static std::vector<ColliderComponent*> colliders;
+	static std::vector<ColliderComponent*> colliders;
 
 private:
 	bool isRunning;

@@ -1,5 +1,6 @@
 #include "Map.h"
 #include "TextureManager.h"
+#include "Constants.h"
 
 
 int lvl1[20][25] = {
