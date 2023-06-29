@@ -21,13 +21,13 @@ public:
 
 		switch (tileID) {
 		case 0:
-			path = Constant::WATER_SPRITE; 
+			path = Constant::DIRT_SPRITE; 
 			break;
 		case 1:
-			path = Constant::DIRT_SPRITE;
+			path = Constant::GRASS_SPRITE;
 			break;
 		case 2:
-			path = Constant::GRASS_SPRITE;
+			path = Constant::WATER_SPRITE;
 			break;
 		}
 	}

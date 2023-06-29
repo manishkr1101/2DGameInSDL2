@@ -122,3 +122,8 @@ bool Game::running()
 {
 	return isRunning;
 }
+
+void Game::addTile(int id, int x, int y) {
+	auto& entity(manager.addEntity());
+	entity.addComponent<TileComponent>(x, y, 32, 32, id);
+}
