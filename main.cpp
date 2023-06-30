@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     const int frameDelay = 1000 / FPS;
     
     Game game;
-    game.init("My Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080);
+    game.init("My Game", Constant::WIDTH, Constant::HEIGHT, true);
     
     Uint32 frameStart, frameTime;
     while (game.running()) {

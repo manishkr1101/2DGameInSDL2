@@ -35,7 +35,7 @@ Game::~Game()
 {
 }
 
-void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+void Game::init(const char* title, int width, int height, bool fullscreen)
 {
 	Uint32 flags = SDL_WINDOW_SHOWN;
 	if (fullscreen) {
@@ -47,7 +47,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 	okay("Subsystem initialized");
 
-	window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
 	if (window == NULL) {
 		err("Couldn't initialize window, error: %s", SDL_GetError());
 		return;
@@ -67,8 +67,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	
 	//ecs implementation
 
-	player.addComponent<TransformComponent>(0.0f, 0.0f, 128, 128, 0.5f);
-	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE);
+	player.addComponent<TransformComponent>(0.0f, 0.0f, 32, 32);
+	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE, 4, 200);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
