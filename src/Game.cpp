@@ -14,10 +14,18 @@ std::vector<ColliderComponent*> Game::colliders;
 Manager manager;
 
 auto& wall(manager.addEntity());
-auto& tile0(manager.addEntity());
-auto& tile1(manager.addEntity());
-auto& tile2(manager.addEntity());
 auto& player(manager.addEntity());
+
+enum groupLabels : std::size_t {
+	groupMap,
+	groupPlayers,
+	groupEnemies,
+	groupColliders
+};
+
+auto& tiles = manager.getGroup(groupMap);
+auto& players = manager.getGroup(groupPlayers);
+auto& enemies = manager.getGroup(groupEnemies);
 
 Game::Game(): isRunning(false), window(NULL)
 {
@@ -58,21 +66,17 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 	
 	//ecs implementation
-	tile0.addComponent<TileComponent>(10, 200, 32, 32, 0);
-	tile1.addComponent<TileComponent>(10, 250, 32, 32, 1);
-	tile1.addComponent<ColliderComponent>("dirt");
-	tile2.addComponent<TileComponent>(10, 300, 32, 32, 2);
-	tile2.addComponent<ColliderComponent>("grass");
 
 	player.addComponent<TransformComponent>(0.0f, 0.0f, 128, 128, 0.5f);
 	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
+	player.addGroup(groupPlayers);
 
 	wall.addComponent<TransformComponent>(300.0f, 300.0f, 20, 300);
 	wall.addComponent<SpriteComponent>(Constant::DIRT_SPRITE);
 	wall.addComponent<ColliderComponent>("wall");
-
+	wall.addGroup(groupMap);
 }
 
 void Game::handleEvents() {
@@ -106,7 +110,10 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	manager.draw();
+	//manager.draw();
+	for (auto e : tiles) e->draw();
+	for (auto e : players) e->draw();
+	for (auto e : enemies) e->draw();
 	SDL_RenderPresent(renderer);
 }
 
@@ -124,6 +131,7 @@ bool Game::running()
 }
 
 void Game::addTile(int id, int x, int y) {
-	auto& entity(manager.addEntity());
-	entity.addComponent<TileComponent>(x, y, 32, 32, id);
+	auto& tile(manager.addEntity());
+	tile.addComponent<TileComponent>(x, y, 32, 32, id);
+	tile.addGroup(groupMap);
 }
