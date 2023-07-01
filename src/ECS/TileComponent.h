@@ -1,44 +1,27 @@
 #pragma once
 
 #include "ECS.h"
-#include "TranformComponent.h"
-#include "SpriteComponent.h"
+#include "../TextureManager.h"
 
 class TileComponent : public Component {
 public:
-	TransformComponent* tranform;
-	SpriteComponent* sprite;
-
-	SDL_Rect tileRect;
-	int tileID;
-	const char* path;
+	SDL_Texture* texture;
+	SDL_Rect srcRect, destRect;
 
 	TileComponent() = default;
 
-	TileComponent(int x, int y, int w, int h, int id) {
-		tileRect = { x, y , w, h };
-		tileID = id;
+	TileComponent(int srcX, int srcY, int xpos, int ypos, const char* path) {
+		texture = TextureManager::LoadTexture(path);
 
-		switch (tileID) {
-		case 0:
-			path = Constant::DIRT_SPRITE; 
-			break;
-		case 1:
-			path = Constant::GRASS_SPRITE;
-			break;
-		case 2:
-			path = Constant::WATER_SPRITE;
-			break;
-		}
+		srcRect.x = srcX;
+		srcRect.y = srcY;
+		srcRect.w = srcRect.h = 32;
+
+		destRect = { xpos, ypos, 64, 64 };
 	}
 
-	void init() override {
-		entity->addComponent<TransformComponent>(tileRect.x, tileRect.y, tileRect.w, tileRect.h);
-		tranform = &entity->getComponent<TransformComponent>();
-
-		entity->addComponent<SpriteComponent>(path);
-		sprite = &entity->getComponent<SpriteComponent>();
-		okay("SpriteComponent got added to Tile with path: %s", path);
+	void draw() override {
+		TextureManager::Draw(texture, srcRect, destRect);
 	}
 
 };

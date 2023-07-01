@@ -11,8 +11,9 @@ public:
 	static const char* DIRT_SPRITE;
 	static const char* GRASS_SPRITE;
 	static const char* WATER_SPRITE;
+	static const char* TERRAIN_SPRITE;
 	static const int FPS;
-	static const int WIDTH = 1600;
+	static const int WIDTH = 2000;
 	static const int HEIGHT = 1600;
 	static const float SCALE;
 };

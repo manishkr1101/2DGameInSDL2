@@ -29,7 +29,7 @@ int lvl1[20][25] = {
 
 Map::Map()
 {
-	loadMap("assets/p_16x16.map", 16, 16);
+	loadMap("assets/map.map", 25, 20);
 }
 
 Map::~Map()
@@ -38,14 +38,19 @@ Map::~Map()
 
 void Map::loadMap(std::string path, int sizeX, int sizeY) 
 {
-	char tile;
+	char c;
 	std::fstream mapFile;
 	mapFile.open(path);
 
+	int srcX, srcY;
+
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {
-			mapFile.get(tile);
-			Game::addTile(atoi(&tile), x * 32, y * 32);
+			mapFile.get(c);
+			srcY = atoi(&c) * 32;
+			mapFile.get(c);
+			srcX = atoi(&c) * 32;
+			Game::addTile(srcX, srcY, x * 64, y * 64);
 			mapFile.ignore();
 		}
 	}

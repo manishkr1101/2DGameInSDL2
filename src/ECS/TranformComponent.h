@@ -14,7 +14,7 @@ public:
 	int width;
 	float scale;
 
-	int speed = 200;
+	int speed = 150;
 
 	TransformComponent() {
 		position.zero();

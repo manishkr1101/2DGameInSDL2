@@ -13,7 +13,6 @@ std::vector<ColliderComponent*> Game::colliders;
 
 Manager manager;
 
-auto& wall(manager.addEntity());
 auto& player(manager.addEntity());
 
 enum groupLabels : std::size_t {
@@ -67,17 +66,12 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	
 	//ecs implementation
 
-	player.addComponent<TransformComponent>(0.0f, 0.0f, 32, 32);
+	player.addComponent<TransformComponent>(0.0f, 0.0f, 32, 32, 2.0f);
 	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE, true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 	
-
-	wall.addComponent<TransformComponent>(300.0f, 300.0f, 20, 300);
-	wall.addComponent<SpriteComponent>(Constant::DIRT_SPRITE);
-	wall.addComponent<ColliderComponent>("wall");
-	wall.addGroup(groupMap);
 }
 
 void Game::handleEvents() {
@@ -122,6 +116,7 @@ void Game::clean()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	TextureManager::clean();
 	SDL_Quit();
 	okay("Game cleaned");
 }
@@ -131,8 +126,8 @@ bool Game::running()
 	return isRunning;
 }
 
-void Game::addTile(int id, int x, int y) {
+void Game::addTile(int srcX, int srcY, int xPos, int yPos) {
 	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(x, y, 32, 32, id);
+	tile.addComponent<TileComponent>(srcX, srcY, xPos, yPos, Constant::TERRAIN_SPRITE);
 	tile.addGroup(groupMap);
 }
