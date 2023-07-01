@@ -68,10 +68,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 	//ecs implementation
 
 	player.addComponent<TransformComponent>(0.0f, 0.0f, 32, 32);
-	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE, 4, 200);
+	player.addComponent<SpriteComponent>(Constant::PLAYER_SPRITE, true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
+	
 
 	wall.addComponent<TransformComponent>(300.0f, 300.0f, 20, 300);
 	wall.addComponent<SpriteComponent>(Constant::DIRT_SPRITE);
@@ -95,7 +96,7 @@ void Game::update()
 {
 	manager.refresh();
 	manager.update();
-
+	
 	for (const auto colA : Game::colliders) {
 		for (const auto colB : Game::colliders) {
 			if (colA!=colB && Collision::AABB(*colA, *colB)) {

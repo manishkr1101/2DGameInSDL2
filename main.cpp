@@ -10,7 +10,8 @@ int main(int argc, char *argv[])
     const int frameDelay = 1000 / FPS;
     
     Game game;
-    game.init("My Game", Constant::WIDTH, Constant::HEIGHT, true);
+    game.init("My Game", Constant::WIDTH, Constant::HEIGHT);
+    okay("Game initialized");
     
     Uint32 frameStart, frameTime;
     while (game.running()) {

@@ -1,6 +1,6 @@
 #include "Constants.h"
 
-const char* Constant::PLAYER_SPRITE = "assets/player_idle.png";
+const char* Constant::PLAYER_SPRITE = "assets/player_anims.png";
 const char* Constant::ENEMY_SPRITE = "assets/enemy.png";
 const char* Constant::DIRT_SPRITE = "assets/dirt.png";
 const char* Constant::GRASS_SPRITE = "assets/grass.png";

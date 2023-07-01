@@ -1,0 +1,15 @@
+﻿  main.cpp
+X:\Visual Studio Projects\FirstGameWithSDL2\src\Game.h(5,10): fatal  error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Collision.cpp
+X:\Visual Studio Projects\FirstGameWithSDL2\src\Collision.h(3,10): fatal  error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Constants.cpp
+  ECS.cpp
+  Game.cpp
+X:\Visual Studio Projects\FirstGameWithSDL2\src\Game.h(5,10): fatal  error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  GameObject.cpp
+X:\Visual Studio Projects\FirstGameWithSDL2\src\GameObject.h(3,10): fatal  error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Map.cpp
+X:\Visual Studio Projects\FirstGameWithSDL2\src\Game.h(5,10): fatal  error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  TextureManager.cpp
+X:\Visual Studio Projects\FirstGameWithSDL2\src\TextureManager.h(3,10): fatal  error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Vector2D.cpp
